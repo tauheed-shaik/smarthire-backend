@@ -1,0 +1,25 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.project.smart_hire:SmartHire >------------------
+[INFO] Building SmartHire 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.0:clean (default-clean) @ SmartHire ---
+[INFO] Deleting C:\Users\shaik\OneDrive\Desktop\CODE\BACKEND\SmartHire\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ SmartHire ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ SmartHire ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 60 source files with javac [debug parameters release 17] to target\classes
+[INFO] /C:/Users/shaik/OneDrive/Desktop/CODE/BACKEND/SmartHire/src/main/java/com/project/smart_hire/Controller/CandidateController.java: Some input files use unchecked or unsafe operations.
+[INFO] /C:/Users/shaik/OneDrive/Desktop/CODE/BACKEND/SmartHire/src/main/java/com/project/smart_hire/Controller/CandidateController.java: Recompile with -Xlint:unchecked for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.778 s
+[INFO] Finished at: 2026-04-02T17:18:32+05:30
+[INFO] ------------------------------------------------------------------------
