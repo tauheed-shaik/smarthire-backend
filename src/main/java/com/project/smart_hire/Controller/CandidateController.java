@@ -45,20 +45,43 @@ public class CandidateController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestParam(required = false) String email, @RequestParam(required = false) String password) {
         HashMap<String, Object> response = new HashMap<>();
         try {
-            Optional<Candidate> opt = repo.findByEmail(email);
-            if (opt.isEmpty() || !encoder.matches(password, opt.get().getPassword())) {
+            System.out.println("=== LOGIN ATTEMPT ===");
+            System.out.println("Email: " + email);
+            System.out.println("Password provided: " + (password != null && !password.isEmpty()));
+            
+            if (email == null || email.trim().isEmpty()) {
+                response.put("Error", "Email is required");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+            
+            if (password == null || password.trim().isEmpty()) {
+                response.put("Error", "Password is required");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+            
+            Optional<Candidate> opt = repo.findByEmail(email.trim());
+            if (opt.isEmpty()) {
                 response.put("Error", "Invalid email or password");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
             }
+            
+            if (!encoder.matches(password, opt.get().getPassword())) {
+                response.put("Error", "Invalid email or password");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            }
+            
             response.put("msg", "Login successful");
             response.put("candidateId", opt.get().getId());
+            System.out.println("LOGIN SUCCESS for: " + email);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            response.put("Error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            System.err.println("LOGIN ERROR: " + e.getMessage());
+            e.printStackTrace();
+            response.put("Error", "Internal server error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
@@ -128,6 +151,15 @@ public class CandidateController {
             response.put("Error", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> testEndpoint(){
+        HashMap<String,Object> response = new HashMap<>();
+        response.put("status","SUCCESS");
+        response.put("message","Candidate controller is working");
+        response.put("timestamp",System.currentTimeMillis());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/get-all-candidates")
