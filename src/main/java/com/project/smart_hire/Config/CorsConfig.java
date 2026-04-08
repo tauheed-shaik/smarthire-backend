@@ -16,10 +16,11 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(
-                    "https://smarthire-frontend-dk2k.vercel.app",
+                .allowedOriginPatterns(
+                    "https://smarthire-frontend-*.vercel.app",
+                    "https://smarthire-frontend.vercel.app",
                     "http://localhost:5173",
-                    "https://smarthire-backend-ap22.onrender.com"
+                    "https://*.onrender.com"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
