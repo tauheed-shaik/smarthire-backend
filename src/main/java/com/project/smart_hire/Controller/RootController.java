@@ -35,6 +35,36 @@ public class RootController {
         return response;
     }
 
+    @GetMapping("/test-db")
+    public Map<String, Object> testDatabase() {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            System.out.println("=== TESTING DATABASE CONNECTION ===");
+            if (dataSource != null) {
+                Connection connection = dataSource.getConnection();
+                String dbInfo = connection.getMetaData().getDatabaseProductName() + " " + 
+                               connection.getMetaData().getDatabaseProductVersion();
+                response.put("database", dbInfo);
+                response.put("status", "CONNECTED");
+                response.put("url", connection.getMetaData().getURL());
+                connection.close();
+                System.out.println("DATABASE CONNECTION SUCCESSFUL");
+            } else {
+                response.put("database", "NOT_INITIALIZED");
+                response.put("status", "ERROR");
+                System.err.println("DATABASE NOT INITIALIZED");
+            }
+        } catch (Exception e) {
+            response.put("database", "CONNECTION_FAILED");
+            response.put("status", "ERROR");
+            response.put("error", e.getMessage());
+            System.err.println("DATABASE CONNECTION FAILED: " + e.getMessage());
+            e.printStackTrace();
+        }
+        response.put("timestamp", LocalDateTime.now());
+        return response;
+    }
+
     @GetMapping("/health")
     public Map<String, Object> health() {
         Map<String, Object> health = new HashMap<>();
