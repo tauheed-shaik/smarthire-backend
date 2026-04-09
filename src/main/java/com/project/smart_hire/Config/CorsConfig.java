@@ -17,10 +17,9 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOriginPatterns(
-                    "https://smarthire-frontend-*.vercel.app",
-                    "https://smarthire-frontend.vercel.app",
+                    "https://smarthire-frontend-dk2k.vercel.app",
                     "http://localhost:5173",
-                    "https://*.onrender.com"
+                    "https://smarthire-backend-ap22.onrender.com"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
@@ -31,7 +30,11 @@ public class CorsConfig implements WebMvcConfigurer {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+            "https://smarthire-frontend-dk2k.vercel.app",
+            "http://localhost:5173",
+            "https://smarthire-backend-ap22.onrender.com"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
