@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api/interviews")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://smarthire-frontend-dk2k.vercel.app", "http://localhost:5173"})
 public class InterviewController {
 
     @Autowired

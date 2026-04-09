@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/questions")
-@CrossOrigin("*")
+@CrossOrigin(origins = {"https://smarthire-frontend-dk2k.vercel.app", "http://localhost:5173"})
 public class QuestionController {
 
     @Autowired

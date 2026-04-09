@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/coding")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://smarthire-frontend-dk2k.vercel.app", "http://localhost:5173"})
 public class CodingQuestionController {
 
     @Autowired
