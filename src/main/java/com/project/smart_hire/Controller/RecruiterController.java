@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = {"https://smarthire-frontend-dk2k.vercel.app", "http://localhost:5173"})
 @RestController
 @RequestMapping("/api/recruiter")
 public class RecruiterController {
